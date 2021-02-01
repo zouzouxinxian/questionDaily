@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0201公平的糖果棒交换</title>
+</head>
+<body>
+    <script>
+
+    /**
+    * @param {number[]} A
+    * @param {number[]} B
+    * @return {number[]}
+    */
+    var fairCandySwap = function(A, B) {
+        var sumA = A.reduce((pre, next)=>{
+            return pre + next;
+        })
+        var sumB = B.reduce((pre, next)=>{
+            return pre + next;
+        })
+        let arrSum = (sumA - sumB) / 2;
+        for (let i = 0; i < A.length; i++) {
+            if(B.includes(A[i] - arrSum)){
+                return [A[i],A[i] - arrSum]
+            }
+        }
+    };
+
+
+    fairCandySwap([1,2],[2,3]);
+    console.log(fairCandySwap([1,2],[2,3]))
+    </script>
+    
+</body>
+</html>

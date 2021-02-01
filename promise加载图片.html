@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise加载一张图片</title>
+</head>
+<body>
+    <script>
+        function loadImg(src) {
+            const p =  new Promise(
+                (resolve, reject) => {
+                    const img = document.createElement('img')
+                    img.onload = () => {
+                        resolve(img)
+                    }
+                    img.onerror = () => {
+                        const err = new Error(`图片加载失败 ${src}`)
+                        reject(err)
+                    }
+                    img.src = src
+                }
+            )
+            return p
+        }
+
+        const url = 'https://pic.leetcode-cn.com/1604237471-xbJgZl-%E5%9B%BE%E7%89%871.png';
+        loadImg(url).then(img => {
+            console.log(img.width)
+            return img
+        }).then(img => {
+            console.log(img.height)
+        }).catch(ex => console.error(ex))
+
+    </script>
+</body>
+</html>

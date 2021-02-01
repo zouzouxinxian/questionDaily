@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节流</title>
+</head>
+<body>
+    <script>
+        // deepClone
+        function deepClone(obj = {}) {
+            if (typeof obj !== 'object' || obj == null) {
+                // obj 是 null 或者不是对象和数组，直接返回
+                return obj;
+            }
+            let res;
+            if (obj instanceof Array) {
+                res = [];
+            } else {
+                res = {};
+            }
+
+            for (let key in obj) {
+                // 判断自身中是否包含自身属性
+                if (obj.hasOwnProperty(key)) {
+                    res[key] = deepClone(obj[key])
+                }
+            }
+            return res;
+        }
+        // 验证
+        o = {a: 1, d: {c: '4'}};
+        res = deepClone(o);
+        console.log(res);
+        console.log(res == o);
+
+    </script>
+</body>
+</html>

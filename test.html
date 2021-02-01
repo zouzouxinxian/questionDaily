@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+</head>
+<body>
+    <div class='container'>
+        <ul id='listAAA'>
+            <li style='background-color: #c01f31'>首页</li>
+            <li style='background-color: #c01f31'>首页2</li>
+            <li style='background-color: #c01f31'>首页3</li>
+            <li style='background-color: #c01f31'>首页4</li>
+            <li style='background-color: #c01f31'>首页5</li>
+
+
+        </ul>
+    </div>
+    <script>
+window.onload = function () {
+    var lis = document.getElementById('listAAA').getElementsByTagName('li');
+    for (var i = 0; i<lis.length; i++) {
+        lis[i].setAttribute('index', i);
+        lis[i].onclick = function () {
+            for (var i = 0; i<lis.length; i++) {
+                if (this.getAttribute('index') == i) {
+                    lis[i].style.color  = '#fff';
+                    lis[i].style.backgroundColor  = '#000';
+                } else {
+                    lis[i].style.color  = '';
+                    lis[i].style.backgroundColor  = '';
+                }
+            }
+        }
+    }
+}
+    </script>
+</body>
+</html>

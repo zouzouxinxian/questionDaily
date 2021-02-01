@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据扁平化</title>
+</head>
+<body>
+    <script>
+
+        // 解法一：递归
+        var arr = [1, [2, [3, 4]]];
+
+        function flatten(arr) {
+            var result = [];
+            for (var i = 0, len = arr.length; i < len; i++) {
+                if (Array.isArray(arr[i])) {
+                    result = result.concat(flatten(arr[i]))
+                }
+                else {
+                    result.push(arr[i])
+                }
+            }
+            return result;
+        }
+
+
+        console.log(flatten(arr))
+
+
+        // 解法二：es6 拓展运算符
+        var arr = [1, [2, [3, 4]]];
+
+        function flatten(arr) {
+
+            while (arr.some(item => Array.isArray(item))) {
+                arr = [].concat(...arr);
+            }
+            return arr;
+        }
+
+        console.log(flatten(arr))
+        
+
+
+        // 解法三：
+
+        const arr1 = [0, 1, 2, [[[3, 4]]]];
+
+        console.log(arr1.flat(3)); // 3 代表数组内最多嵌套层数
+        // expected output: [0, 1, 2, 3, 4]
+
+
+
+    </script>
+</body>
+</html>

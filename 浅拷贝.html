@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节流</title>
+</head>
+<body>
+    <script>
+        // 首先定义一个对象
+        const hero = {
+        name: 'Batman',
+        city: 'Gotham'
+        };
+        // **********************方法一**********************
+        const heroEnhancedClone = {
+        ...hero,
+        name: 'Batman Clone',
+        realName: 'Bruce Wayne'
+        };
+
+        // 验证
+        heroEnhancedClone;  // { name: 'Batman Clone', city: 'Gotham', realName: 'Bruce Wayne' }
+
+        // **********************方法二**********************
+        const { ...heroClone } = hero;
+
+        // 验证
+        heroClone; // { name: 'Batman', city: 'Gotham' }
+        hero === heroClone; // => false
+
+        // **********************方法三**********************
+        const hero = {
+        name: 'Batman',
+        city: 'Gotham'
+        };
+
+        // 验证
+        const heroClone = Object.assign({}, hero);
+        heroClone; // { name: 'Batman', city: 'Gotham' }
+        hero === heroClone; // => false
+
+    </script>
+</body>
+</html>

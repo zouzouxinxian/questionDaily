@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0118</title>
+</head>
+<body>
+    <script>
+        let string = '${1}今天生病了，所以没去${2}, ${3}打来电话 ，询问情况 '
+        let arr = ['xx', 'ss', 'dd'];
+        // arr.forEach((item, index) => {
+        //     string = string.replace("${"+ parseInt(index+1) +"}", item)
+        // })
+        // console.log(string)
+
+        let reg = /\$\{(\d)\}/g;
+        string1 = string.replace(reg,function(match, p1){
+            console.log(arguments)
+            return arr[p1-1];
+        })
+        // arr.forEach((item, index) => {
+        //     string = string.replace(reg, item)
+        // })
+        console.log(string1)
+
+    </script>
+    
+</body>
+</html>
