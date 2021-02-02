@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html  lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <title>0202替换后的最长重复字符串</title>
+
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- 给你一个仅由大写英文字母组成的字符串，你可以将任意位置上的字符替换成另外的字符，
+            总共可最多替换 k 次。在执行上述操作后，找到包含重复字母的最长子串的长度。 -->
+        
+            <!-- 示例 1：
+
+            输入：s = "ABAB", k = 2
+            输出：4
+            解释：用两个'A'替换为两个'B',反之亦然。 -->
+        <script>
+            /**
+            * @param {string} s
+            * @param {number} k
+            * @return {number}
+            */
+            // var characterReplacement = function(s, k) {
+            //     let reg = /(\w)\1\1/g;
+            //     const string = s.replace(reg, (match, p1)=>{
+            //         console.log(match, p1)
+
+            //         return match
+            //     })
+            // };
+            var characterReplacement = function(s, k) {
+                const num = new Array(26).fill(0);
+                const n = s.length;
+                let maxn = 0, left = 0, right = 0;
+
+                while (right < n) {
+                    const r = s[right].charCodeAt() - 'A'.charCodeAt();
+                    const l = s[left].charCodeAt() - 'A'.charCodeAt();
+                    num[r]++;
+                    maxn = Math.max(maxn, num[r])
+
+                    if (right - left + 1 - maxn > k) {
+                        num[l]--;
+                        left++;
+                    }
+                    right++;
+                }
+                return right - left;
+            };
+
+            console.log(characterReplacement("AABABBA", 1))
+        </script>
+    </body>
+</html>
