@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20210402错题</title>
+</head>
+<body>
+    <script>
+        // ********************* 1 ************************
+        alert(undefined == null);
+        // 输出结果是true
+        // undefined == null //true;
+        // undefined === null //false
+
+        // ********************* 2 ************************
+        var person={fname:"John",lname:"Doe",age:25};
+        var txt="";
+        for (x in person) {
+            txt=txt + person[x];
+        }
+        alert(txt);
+
+        // 输出为：JohnDoe25
+
+        // ********************* 3 ************************
+        // 只能输入零和非零开头的数字
+        // ^(0|[1-9][0-9]*)$
+        var reg = /^(0|[1-9][0-9]*)$/
+
+
+        // ********************* 4 ************************
+        // 获取原生JS的父节点的是: element.parentNode
+
+        // 总结：
+        // node节点有几个常用的属性：
+
+        // firstChild
+        // lastChild
+        // nextSibling：下一个兄弟节点
+        // previousSibling：前一个兄弟节点
+        // 这些都是属性，都不需要添加括号的。
+
+
+        // ********************* 5 ************************
+        // javascirpt中的数字在计算机内存储为多少Byte？
+        // 8 Byte
+        // 关于Javascript中数字的部分知识总结：
+        //     1.Javascript中，由于其变量内容不同，变量被分为基本数据类型变量和引用数据类型变量。基本类型变量用八字节内存，存储基本数据类型(数值、布尔值、null和未定义)的值，引用类型变量则只保存对对象、数组和函数等引用类型的值的引用(即内存地址)。
+        //     2. JS中的数字是不分类型的，也就是没有byte/int/float/double等的差异
+
+        
+        // ********************* 6 ************************
+        
+        // History 对象
+        // History 对象包含用户（在浏览器窗口中）访问过的 URL。
+        // History 对象是 window 对象的一部分，可通过 window.history 属性对其进行访问。
+        // 注意： 没有应用于 History 对象的公开标准，不过所有浏览器都支持该对象。
+
+        // History 对象属性:
+        // length	返回历史列表中的网址数
+
+        // History 对象方法:
+        // back()	  加载 history 列表中的前一个 URL
+        // forward()  加载 history 列表中的下一个 URL
+        // go()	      加载 history 列表中的某个具体页面
+
+
+    </script>
+</body>
