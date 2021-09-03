@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>比较版本号</title>
+</head>
+<body>
+    <script>
+/**
+ * @param {string} version1
+ * @param {string} version2
+ * @return {number}
+ */
+ var compareVersion = function(version1, version2) {
+    let version1Arr = version1.split('.')
+    let version2Arr = version2.split('.')
+    let flag = 0;
+    // let length = version1Arr.length > version2Arr.length ? version1Arr.length : version2Arr.length
+    let length = Math.max(version1Arr.length, version2Arr.length)
+    for(let i = 0; i < length; i++) {
+
+        // 方法一
+        // if (!version1Arr[i]) version1Arr[i] = 0
+        // if (!version2Arr[i]) version2Arr[i] = 0
+        // if (parseInt(version1Arr[i]) !== parseInt(version2Arr[i])) {
+        //     flag = parseInt(version1Arr[i]) > parseInt(version2Arr[i]) ? 1 : parseInt(version1Arr[i]) < parseInt(version2Arr[i]) ? -1 : 0
+        //     return flag
+        // }
+
+        // 方法二
+        version1Arr[i] = parseInt(version1Arr[i] || 0)
+        version2Arr[i] = parseInt(version2Arr[i] || 0)
+        if (version1Arr[i] !== version2Arr[i]) {
+            flag = version1Arr[i] > version2Arr[i] ? 1 : version1Arr[i] < version2Arr[i] ? -1 : 0
+            return flag
+        }
+    }
+    return flag
+};
+
+    console.log(compareVersion('7.0.1', '7'))
+
+    </script>
+</body>
+</html>

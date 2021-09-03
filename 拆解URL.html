@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拆解URL</title>
+</head>
+<body>
+    <script>
+/**
+ * 1. 实现一个函数，可以对 url 中的 query 部分做拆解，
+ * 返回一个 key - value 形式的 object
+ */
+
+ function getQueryObj(url) {
+  var first = url.split('?')[1].split('#')[0].split('&');
+  var res = {};
+  for (let i = 0; i < first.length; i++) {
+    if (!first[i].split('=')[1]) {
+      res[first[i].split('=')[0]] = '';
+    } else {
+      res[first[i].split('=')[0]] = first[i].split('=')[1];
+    }
+  }
+  return res;
+}
+const url = 'http://query.com/?a=1&e&b=2&c=xx&d#hash';
+console.log(getQueryObj(url)); // {a: 1, b: 2, c: 'xx', d: ''}
+
+
+arrToQueryString (arr) {
+     arr.forEach((item, index) => {
+         this.queryParam = this.queryParam + Object.keys(item).map(function (key) {
+             let trueKey = 'keywords[' + index + '][' + key + ']';
+             return ''.concat(encodeURIComponent(trueKey), '=').concat(encodeURIComponent(item[key])) + '&';
+         }).join('');
+     });
+     return this.queryParam;
+ }
+//  使用：
+// 根据需要取出指定key下的value值。
+let param = this.queryLinkParams('id');
+
+    </script>
+</body>
+</html>
