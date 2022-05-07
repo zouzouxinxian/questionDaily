@@ -1,40 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test</title>
+    <title>vue3.0</title>
 </head>
+
 <body>
     <div class='container'>
-        <ul id='listAAA'>
-            <li style='background-color: #c01f31'>首页</li>
-            <li style='background-color: #c01f31'>首页2</li>
-            <li style='background-color: #c01f31'>首页3</li>
-            <li style='background-color: #c01f31'>首页4</li>
-            <li style='background-color: #c01f31'>首页5</li>
-
-
-        </ul>
     </div>
     <script>
-window.onload = function () {
-    var lis = document.getElementById('listAAA').getElementsByTagName('li');
-    for (var i = 0; i<lis.length; i++) {
-        lis[i].setAttribute('index', i);
-        lis[i].onclick = function () {
-            for (var i = 0; i<lis.length; i++) {
-                if (this.getAttribute('index') == i) {
-                    lis[i].style.color  = '#fff';
-                    lis[i].style.backgroundColor  = '#000';
-                } else {
-                    lis[i].style.color  = '';
-                    lis[i].style.backgroundColor  = '';
+        let activeEffect;
+
+        let data = {
+            ok: true,
+            text: 1,
+        };
+        const bucket = new WeakMap();
+
+        const obj = new Proxy(data, {
+            get(target, key) {
+                if (!activeEffect) {
+                    return;
                 }
-            }
+                let depsMap = bucket.get(target);
+                if (!depsMap) {
+                    bucket.set(target, (depsMap = new Map()));
+                }
+                let deps = depsMap.get(key);
+                if (!deps) {
+                    depsMap.set(key, (deps = new Set()));
+                }
+                deps.add(activeEffect);
+                return Reflect.get(target, key);
+            },
+            set(target, key, newVal) {
+                Reflect.set(target, key, newVal);
+                const depsMap = bucket.get(target);
+                if (!depsMap) return;
+                const effects = depsMap.get(key);
+                effects && effects.forEach((fn) => fn());
+            },
+        });
+
+        function effect(fn) {
+            const _effect = function () {
+                activeEffect = _effect;
+                return fn();
+            };
+            _effect();
         }
-    }
-}
+
+        const dom = document.querySelector("#app");
+        effect(() => {
+            console.log(1)
+            dom.innerHTML = obj.ok ? obj.text : 'helloworld';
+        });
+
+        setTimeout(() => {
+            obj.ok = false;
+            obj.text = 3
+        }, 2000);
     </script>
 </body>
+
 </html>

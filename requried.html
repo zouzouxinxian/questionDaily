@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0118</title>
+</head>
+<body>
+    <script>
+        let mainFormItems=[{
+        "label": "申请信息",
+        "id": "card_1641980266408",
+        "bizMean": "",
+        "type": "card",
+        "icon": "ios-card-outline",
+        "defaultValue": "",
+        "remote": 0,
+        "propName": "byPropCard",
+        "options": {
+            "bordered": true,
+            "disHover": true,
+            "title": true,
+            "down": true
+        },
+        "mainFormItems": [{
+            "label": "栅格布局",
+            "id": "grid_1641980199327",
+            "type": "grid",
+            "icon": "ios-grid-outline",
+            "defaultValue": "",
+            "remote": 0,
+            "propName": "byPropGrid",
+            "columns": [{
+                "span": 12,
+                "mainFormItems": [{
+                    "label": "申请部门",
+                    "id": "input_1641980254376",
+                    "modelItemId": "Apply_Department",
+                    "bizMean": "",
+                    "type": "input",
+                    "icon": "ios-create-outline",
+                    "defaultValue": "",
+                    "remote": 0,
+                    "designName": "byDesignText",
+                    "propName": "byPropText",
+                    "renderName": "byRenderText",
+                    "options": {
+                        "width": "100%",
+                        "height": "",
+                        "size": "default",
+                        "placeholder": "请输入",
+                        "maxLength": 50,
+                        "dataType": "varchar",
+                        "pattern": "",
+                        "class": "",
+                        "required": true,
+                    "visible": true,
+                    "disabled": true
+                    },
+                    "events": {
+                        "change": "",
+                        "click": ""
+                    },
+                    "domainType": "grid"
+                }, {
+                    "label": "申请人电话",
+                    "id": "input_1641980281380",
+                    "modelItemId": "Apply_Person_Tel",
+                    "bizMean": "",
+                    "type": "input",
+                    "icon": "ios-create-outline",
+                    "defaultValue": "",
+                    "remote": 0,
+                    "designName": "byDesignText",
+                    "propName": "byPropText",
+                    "renderName": "byRenderText",
+                    "options": {
+                        "width": "100%",
+                        "height": "",
+                        "size": "default",
+                        "placeholder": "请输入",
+                        "maxLength": 50,
+                        "dataType": "varchar",
+                        "pattern": "",
+                        "class": "",
+                        "required": true,
+                    "visible": true,
+                    "disabled": true
+                    },
+                    "events": {
+                        "change": "",
+                        "click": ""
+                    },
+                    "domainType": "grid"
+                }]
+            }, {
+                "span": 12,
+                "mainFormItems": [{
+                    "label": "申请人",
+                    "id": "input_1641980339513",
+                    "modelItemId": "Apply_Person_Name",
+                    "bizMean": "",
+                    "type": "input",
+                    "icon": "ios-create-outline",
+                    "defaultValue": "",
+                    "remote": 0,
+                    "designName": "byDesignText",
+                    "propName": "byPropText",
+                    "renderName": "byRenderText",
+                    "options": {
+                        "width": "100%",
+                        "height": "",
+                        "size": "default",
+                        "placeholder": "请输入",
+                        "maxLength": 50,
+                        "dataType": "varchar",
+                        "pattern": "",
+                        "class": ""
+                    },
+                    "events": {
+                        "change": "",
+                        "click": ""
+                    },
+                    "domainType": "grid"
+                }, {
+                    "label": "申请人邮箱",
+                    "id": "input_1641980264676",
+                    "modelItemId": "Apply_Person_Email",
+                    "bizMean": "",
+                    "type": "input",
+                    "icon": "ios-create-outline",
+                    "defaultValue": "",
+                    "remote": 0,
+                    "designName": "byDesignText",
+                    "propName": "byPropText",
+                    "renderName": "byRenderText",
+                    "options": {
+                        "width": "100%",
+                        "height": "",
+                        "size": "default",
+                        "placeholder": "请输入",
+                        "maxLength": 50,
+                        "dataType": "varchar",
+                        "pattern": "",
+                        "class": ""
+                    },
+                    "events": {
+                        "change": "",
+                        "click": ""
+                    },
+                    "domainType": "grid"
+                }]
+            }],
+            "options": {
+                "gutter": 0,
+                "justify": "start",
+                "align": "top",
+                "type": "flex"
+            }
+        }]
+    }]
+    let res=[]
+function required(obj){
+    obj.forEach(element => {
+        if(element.mainFormItems){
+            required(element.mainFormItems)
+        }
+        if(element.columns){
+            element.columns.forEach(e=>{
+                e.mainFormItems.forEach(item=>{
+                    res.push({
+                        fieldName: item.label,
+                        visible: item.visible || true,
+                        modelItemId: item.mainFormItems,
+                        disabled: item.disabled || false,
+                        fieldType: item.type,
+                        required: item.required || false,
+                    })
+                })
+            })
+        }
+    });
+    return res
+}
+
+function a(data) {
+  const arr = [];
+  const dfs = function(obj) {
+    if (obj.hasOwnProperty("mainFormItems")) {
+      dfs(obj.mainFormItems);
+    } else if (Array.isArray(obj)) {
+      for (let item of obj) {
+        dfs(item);
+      }
+    } else if (obj.hasOwnProperty("columns")) {
+      for (let item of obj.columns) {
+        dfs(item);
+      }
+    } else {
+      arr.push({
+        fieldName: obj.label,
+        visible: obj.option?.visible ? true : false,
+        modelItemId: obj.modelItemId,
+        disabled: obj.option?.disabled ? true : false,
+        fieldType: obj.type,
+        required: obj.option?.disabled ? true : false
+      });
+    }
+  };
+
+  dfs(data);
+  return arr;
+}
+
+
+console.log(required(mainFormItems))
+    </script>
+    
+</body>
+</html>

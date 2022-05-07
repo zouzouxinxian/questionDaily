@@ -1,0 +1,64 @@
+{
+    "mainFormItems": [{
+        "label": "栅格布局",
+        "id": "grid_1643265308086",
+        "type": "grid",
+        "icon": "ios-grid-outline",
+        "defaultValue": "",
+        "remote": 0,
+        "propName": "byPropGrid",
+        "columns": [{
+            "span": 12,
+            "mainFormItems": [{
+                "label": "单行文本",
+                "id": "input_1643265364503",
+                "modelItemId": "input_1643265364503",
+                "bizMean": "",
+                "type": "input",
+                "icon": "ios-create-outline",
+                "defaultValue": "",
+                "remote": 0,
+                "designName": "byDesignText",
+                "propName": "byPropText",
+                "renderName": "byRenderText",
+                "options": {
+                    "width": "100%",
+                    "height": "",
+                    "size": "default",
+                    "placeholder": "请输入",
+                    "maxLength": 500,
+                    "dataType": null,
+                    "pattern": "",
+                    "class": "",
+                    "required": true,
+                    "visible": true,
+                    "disabled": true,
+                    "clearable": true
+                },
+                "events": {
+                    "change": "",
+                    "click": ""
+                },
+                "domainType": "grid"
+            }]
+        }, {
+            "span": 12,
+            "mainFormItems": []
+        }],
+        "options": {
+            "gutter": 0,
+            "justify": "start",
+            "align": "top",
+            "type": "flex"
+        },
+        "modelItemId": "grid_1643265308086"
+    }],
+    "mainFormConfig": {
+        "title": "表单标题",
+        "labelWidth": 120,
+        "labelPosition": "right",
+        "size": "small",
+        "border": false,
+        "events": null
+    }
+}

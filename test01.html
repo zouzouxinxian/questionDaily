@@ -32,6 +32,12 @@
 
     </div>
     <script>
+        function fun( {a=123,b=456} = {a:1,b:2} ) {
+            return {a,b}
+        }
+        console.log(fun( )) // {a:1,b:2}
+        console.log(fun({a:3})) // {a:3,b:456}
+        console.log(fun({})) // {a:123,b:456}
     </script>
 </body>
 </html>

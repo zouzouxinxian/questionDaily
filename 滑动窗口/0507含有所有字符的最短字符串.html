@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>含有所有字符的最短字符串</title>
+</head>
+
+<body>
+    <script>
+        // 给定两个字符串 s 和 t。 返回 s 中包含 t 的所有字符的最短子字符串。 如果 s 中不存在符合条件的子字符串， 则返回空字符串 ""。
+
+        // 如果 s 中存在多个符合条件的子字符串， 返回任意一个。
+
+        // 注意： 对于 t 中重复字符， 我们寻找的子字符串中该字符数量必须不少于 t 中该字符数量。
+
+
+        // 示例 1：
+
+        // 输入： s = "ADOBECODEBANC", t = "ABC"
+        // 输出： "BANC"
+        // 解释： 最短子字符串 "BANC"
+        // 包含了字符串 t 的所有字符 'A'、'B'、'C'
+
+        /**
+         * @param {string} s
+         * @param {string} t
+         * @return {string}
+         */
+        var minWindow = function (s, t) {
+            let left = 0,
+                right = 0
+            let res = ''
+            let len = s.length
+            let min = Infinity
+            let diff = t.length
+            let map = new Map()
+            for (let key of t) {
+                // t中存在相同的字符
+                map.set(key, map.get(key) + 1 || 0)
+            }
+
+            while (right < len) {
+                if (map.has(s[right])) {
+                    if (map.get(s[right]) > -1) diff--
+                    map.set(s[right], map.get(s[right]) - 1)
+                }
+
+                while (diff == 0) {
+                    if (right - left < min) {
+                        min = right - left
+                        res = [left, right]
+                        res = s.substring(left, right + 1)
+                    }
+
+                    if (map.has(s[left])) {
+                        map.set(s[left], map.get(s[left]) + 1)
+                        if (map.get(s[left]) > -1) {
+                            diff++
+                        }
+                    }
+                    left++
+                }
+                right++
+            }
+            return res
+        };
+    </script>
+</body>
+
+</html>
